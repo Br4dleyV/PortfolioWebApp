@@ -1,2 +1,2 @@
 # Intro
-Welcome to my portfolio website!
+Welcome! I'm Bradley Velle, an Applied Computer Sciences student at Howest Brugge. As a side project, I am creating this page where I add all my projects that I made for school and next to it, showing off what I've made. This way, I have a collection of everything I made for future references and easy access.
