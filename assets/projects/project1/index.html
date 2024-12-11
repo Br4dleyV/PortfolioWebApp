@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HOWEST tariff chooser</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sono:wght@200;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Sono:wght@200;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/screen.css">
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/data/tariffs.js"></script>
+
+    <script src="assets/js/consumption-component/calculations.js"></script>
+
+    <script src="assets/js/tariff-matcher/ui-interaction-handler.js"></script>
+    <script src="assets/js/tariff-matcher/calculations.js"></script>
+    <script src="assets/js/tariff-matcher/matcher.js"></script>
+    <script src="assets/js/tariff-matcher/renderer.js"></script>
+
+    <script src="assets/js/tariff-overview-component/sorter.js"></script>
+    <script src="assets/js/tariff-overview-component/renderer.js"></script>
+
+    <script src="assets/js/user-information-processing-component/helpers.js"></script>
+    <script src="assets/js/user-information-processing-component/ui-interaction-handler.js"></script>
+
+    <script src="assets/js/init.js"></script>
+
+</head>
+<body>
+
+<h1>HOWEST tariff chooser</h1>
+
+<form action="#" method="POST" id="user-information">
+    <fieldset class="step" id="general-information">
+        <legend>General information</legend>
+
+        <!-- Postcode -->
+        <label for="postcode">Postcode:</label>
+        <input type="number" id="postcode" name="postcode" min="0" value="8000" required>
+
+        <!-- Vat percentage -->
+        <p>Are you a residential or business customer?</p><br>
+        <input type="radio" id="residential" name="vatpercentage" value="6" checked>
+        <label for="residential">Residential<span>6% VAT</span></label>
+        <input type="radio" id="business" name="vatpercentage" value="12">
+        <label for="business">Business<span>12% VAT</span></label>
+
+        <!-- Type of contract -->
+        <p>What type of contracts are you looking for?</p><br>
+        <input type="checkbox" id="electricity" name="contracttype" value="electricity" checked>
+        <label for="electricity">Electricity</label>
+        <input type="checkbox" id="gas" name="contracttype" value="gas" checked>
+        <label for="gas">Gas</label>
+
+        <button type="button" class="next" data-target="personal-preferences">Configure personal preferences</button>
+    </fieldset>
+    <fieldset class="step hidden" id="personal-preferences">
+        <legend>Personal preferences</legend>
+
+        <!-- Minimum renewability -->
+        <label for="renewability">Minimal amount of energy from renewable sources such as sun, wind and water.</label>
+        <label class="range">50%</label>
+        <input type="range" id="renewability" name="renewability" min="0" max="100" value="10">
+
+        <!-- Any things the user owns -->
+        <p>Do you have one of the following:</p><br>
+        <input type="checkbox" id="el-veh" name="amenities" value="electric vehicle" checked>
+        <label for="el-veh">Electric Vehicle</label>
+        <input type="checkbox" id="solar" name="amenities" value="solar panels" checked>
+        <label for="solar">Solar panels</label>
+
+        <!-- Amount of ppl in household -->
+        <label for="amount-of-people">Amount of people in your household:</label>
+        <input type="number" id="amount-of-people" name="amount-of-people" value="2" min="1" max="20" required>
+
+        <!-- Type of property -->
+        <p>Type of property</p><br>
+        <input type="radio" id="apartment" name="propertytype" value="apartment">
+        <label for="apartment">Apartment</label>
+        <input type="radio" id="terraced" name="propertytype" value="terracedHouse">
+        <label for="terraced">Terraced house</label>
+        <input type="radio" id="semi-detached" name="propertytype" value="semiDetached" checked>
+        <label for="semi-detached">Semi-detached house</label>
+        <input type="radio" id="detached" name="propertytype" value="detachedHouse">
+        <label for="detached">Detached house</label>
+
+        <!-- Insulated yes/no -->
+        <p>Is the property insulated?</p><br>
+        <input type="radio" id="insulation-yes" name="insulation" value="true" checked>
+        <label for="insulation-yes">Yes</label>
+        <input type="radio" id="insulation-no" name="insulation" value="false">
+        <label for="insulation-no">No</label>
+
+        <div class="flexcontainer navigation">
+            <button type="button" class="previous" data-target="general-information">Configure general information
+            </button>
+            <button type="submit" class="next">Display my matching tariffs</button>
+        </div>
+    </fieldset>
+</form>
+
+<section class="step hidden" id="tariff-overview">
+    <h2>Tariff overview</h2>
+    <p>Based on your estimated consumption of: </p>
+    <ul>
+        <li class="electricityEstimate"><span>1000 kWh</span> for electricity</li>
+        <li class="gasEstimate"><span>1000 kWh</span> for gas</li>
+    </ul>
+
+    <div class="flexcontainer">
+
+    </div>
+    <div class="flexcontainer navigation">
+        <button type="button" class="previous" data-target="personal-preferences">Configure personal preferences
+        </button>
+        <button class="next">Continue</button>
+    </div>
+</section>
+<section class="step hidden" id="selection">
+    <h2>You've selected the following plan(s)</h2>
+    <div class="selected-tariff flexcontainer">
+
+        <!-- voorbeeld van een article -->
+        <article>
+            <h3>optimal electricity</h3>
+            <p>€ 149.50 / month</p>
+        </article>
+    </div>
+    <button class="next">Confirm my choice</button>
+
+    <table>
+        <caption>All available plans</caption>
+        <thead>
+        <tr>
+            <td colspan="4">
+                <form id="table-sort" action="#" method="get">
+                    <label for="filter">
+                        Filter by:
+                    </label>
+                    <select name="filter" id="filter">
+                        <option value="name">Tariff name</option>
+                        <option value="type">Tariff type</option>
+                    </select>
+                    <label>
+                        <select name="direction" id="direction">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </label>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <th scope="col">Plan name</th>
+            <th scope="col">Energy type</th>
+            <th scope="col">Tariff</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <button type="button" class="previous" data-target="tariff-overview">Back to tariff suggestion</button>
+</section>
+
+<section class="step hidden" id="confirmation">
+    <h2>Thank you customer from region <strong class="region">8000</strong> for your engagement!</h2>
+    <p>You've selected the following plans:</p>
+    <div class="flexcontainer">
+
+    </div>
+    <p>Your total monthly payment will be <span class="total-monthly">€ 700</span> (VAT included). Payments will be
+        deducted
+        from your account by monthly direct debit, starting the first of next month. </p>
+    <p>Thank you for trusting HOWEST tariff chooser.</p>
+</section>
+
+
+</body>
+</html>
