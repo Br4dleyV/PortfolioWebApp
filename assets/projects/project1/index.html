@@ -34,6 +34,11 @@
 </head>
 <body>
 
+<div id="notification">
+    <p>Here comes the notification text</p>
+    <a href="#">Click to close</a>
+</div>
+
 <h1>HOWEST tariff chooser</h1>
 
 <form action="#" method="POST" id="user-information">
@@ -42,20 +47,20 @@
 
         <!-- Postcode -->
         <label for="postcode">Postcode:</label>
-        <input type="number" id="postcode" name="postcode" min="0" value="8000" required>
+        <input type="number" id="postcode" name="postcode" min="0" required>
 
         <!-- Vat percentage -->
         <p>Are you a residential or business customer?</p><br>
-        <input type="radio" id="residential" name="vatpercentage" value="6" checked>
+        <input type="radio" id="residential" name="vatpercentage" value="6" required>
         <label for="residential">Residential<span>6% VAT</span></label>
-        <input type="radio" id="business" name="vatpercentage" value="12">
+        <input type="radio" id="business" name="vatpercentage" value="12" required>
         <label for="business">Business<span>12% VAT</span></label>
 
         <!-- Type of contract -->
         <p>What type of contracts are you looking for?</p><br>
-        <input type="checkbox" id="electricity" name="contracttype" value="electricity" checked>
+        <input type="checkbox" id="electricity" name="contracttype" value="electricity">
         <label for="electricity">Electricity</label>
-        <input type="checkbox" id="gas" name="contracttype" value="gas" checked>
+        <input type="checkbox" id="gas" name="contracttype" value="gas">
         <label for="gas">Gas</label>
 
         <button type="button" class="next" data-target="personal-preferences">Configure personal preferences</button>
@@ -65,36 +70,36 @@
 
         <!-- Minimum renewability -->
         <label for="renewability">Minimal amount of energy from renewable sources such as sun, wind and water.</label>
-        <label class="range">50%</label>
-        <input type="range" id="renewability" name="renewability" min="0" max="100" value="10">
+        <label for="renewability" class="range">50%</label>
+        <input type="range" id="renewability" name="renewability" min="0" max="100">
 
         <!-- Any things the user owns -->
         <p>Do you have one of the following:</p><br>
-        <input type="checkbox" id="el-veh" name="amenities" value="electric vehicle" checked>
+        <input type="checkbox" id="el-veh" name="amenities" value="electric vehicle">
         <label for="el-veh">Electric Vehicle</label>
-        <input type="checkbox" id="solar" name="amenities" value="solar panels" checked>
+        <input type="checkbox" id="solar" name="amenities" value="solar panels">
         <label for="solar">Solar panels</label>
 
         <!-- Amount of ppl in household -->
         <label for="amount-of-people">Amount of people in your household:</label>
-        <input type="number" id="amount-of-people" name="amount-of-people" value="2" min="1" max="20" required>
+        <input type="number" id="amount-of-people" name="amount-of-people" min="1" max="20" required>
 
         <!-- Type of property -->
         <p>Type of property</p><br>
-        <input type="radio" id="apartment" name="propertytype" value="apartment">
+        <input type="radio" id="apartment" name="propertytype" value="apartment" required>
         <label for="apartment">Apartment</label>
-        <input type="radio" id="terraced" name="propertytype" value="terracedHouse">
+        <input type="radio" id="terraced" name="propertytype" value="terracedHouse" required>
         <label for="terraced">Terraced house</label>
-        <input type="radio" id="semi-detached" name="propertytype" value="semiDetached" checked>
+        <input type="radio" id="semi-detached" name="propertytype" value="semiDetached" required>
         <label for="semi-detached">Semi-detached house</label>
-        <input type="radio" id="detached" name="propertytype" value="detachedHouse">
+        <input type="radio" id="detached" name="propertytype" value="detachedHouse" required>
         <label for="detached">Detached house</label>
 
         <!-- Insulated yes/no -->
         <p>Is the property insulated?</p><br>
-        <input type="radio" id="insulation-yes" name="insulation" value="true" checked>
+        <input type="radio" id="insulation-yes" name="insulation" value="true" required>
         <label for="insulation-yes">Yes</label>
-        <input type="radio" id="insulation-no" name="insulation" value="false">
+        <input type="radio" id="insulation-no" name="insulation" value="false" required>
         <label for="insulation-no">No</label>
 
         <div class="flexcontainer navigation">
@@ -146,6 +151,7 @@
                     <select name="filter" id="filter">
                         <option value="name">Tariff name</option>
                         <option value="type">Tariff type</option>
+                        <option value="monthlyPrice">Tariff price</option>
                     </select>
                     <label>
                         <select name="direction" id="direction">
